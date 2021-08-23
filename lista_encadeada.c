@@ -76,10 +76,19 @@ void print(list* data) {
 
     list* p;
 
-    printf("lines =");
-
     for(p = data; p!=NULL; p = p -> next) {
         printf(" %d", p->info);
+    }
+
+    printf("\n");
+}
+
+void print_as_char(list* data) {
+
+    list* p;
+
+    for(p = data; p!=NULL; p = p -> next) {
+        printf(" %c", p->info);
     }
 
     printf("\n");

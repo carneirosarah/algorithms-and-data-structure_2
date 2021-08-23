@@ -14,6 +14,7 @@ list* search (list* data, int value);
 list* delete_node (list* data, int value);
 void free_list (list* data);
 void print(list* data);
+void print_as_char(list* data);
 int is_empty(list* data);
 list* reverse (list* a);
 

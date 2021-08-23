@@ -1,12 +1,11 @@
 #include "arvore_binaria_busca.h"
-#include "lista_encadeada.c"
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.h> 
+#include <string.h>
 
 
 binary_tree* new_binary_tree() {
-    
+
     return NULL;
 }
 
@@ -43,10 +42,10 @@ void print_tree(binary_tree* tree) {
         return;
     }
     
-    print(tree -> left);
+    print_tree(tree -> left);
     printf("%s\n", tree -> info);
     print(tree -> lines);
-    print(tree -> right);
+    print_tree(tree -> right);
 }
 
 int count_nodes (binary_tree* tree) {
@@ -116,11 +115,11 @@ binary_tree* search_tree (binary_tree* tree, char* value) {
 
     if (strcmp(tree->info, value) > 0) {
         
-        search(tree -> left, value);
+        search_tree(tree -> left, value);
 
     } else if (strcmp(tree->info, value) < 0) {
 
-        search(tree -> right, value);
+        search_tree(tree -> right, value);
     }
 
     return tree;
@@ -130,23 +129,27 @@ binary_tree* insert_tree (binary_tree* tree, char* value, int line) {
     
     if (binary_tree_empty(tree)) {
         
-        binary_tree* node = (binary_tree*) malloc(sizeof(binary_tree));
-        node -> info = value;
-        node -> lines = insert(new_node(), line);
-        node -> left = NULL;
-        node -> right = NULL;
+        tree = (binary_tree*) malloc(sizeof(binary_tree));
+        tree -> info = (char*) calloc(255, sizeof(char));
+        strcpy(tree -> info, value);
+        tree -> lines = insert(new_node(), line);
+        tree -> left = NULL;
+        tree -> right = NULL;
     
-    } if (strcmp(tree->info, value) > 0) {
+    } else if (strcmp(tree->info, value) > 0) {
         
-        tree -> left = insert(tree -> left, value);
+        tree -> left = insert_tree(tree -> left, value, line);
 
     } else if (strcmp(tree->info, value) < 0) {
 
-        tree -> right = search(tree -> right, value);
+        tree -> right = insert_tree(tree -> right, value, line);
     
     } else {
 
-        tree -> lines = insert(tree -> lines, line);
+        if (search(tree -> lines, line) == NULL) {
+
+            tree -> lines = insert(tree -> lines, line);
+        }
     }
 
     return tree;

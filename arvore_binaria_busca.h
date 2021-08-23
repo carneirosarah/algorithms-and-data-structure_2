@@ -1,6 +1,8 @@
 #ifndef ARVORE_BINARIA_H
 #define ARVORE_BINARIA_H
 
+#include "lista_encadeada.c"
+
 struct binary_tree {
     char* info;
     struct binary_tree* right;
@@ -9,13 +11,6 @@ struct binary_tree {
 };
 
 typedef struct binary_tree binary_tree;
-
-struct list {
-    int info;
-    struct list* next;
-};
-
-typedef struct list list;
 
 binary_tree* new_binary_tree();
 binary_tree* insert_tree (binary_tree* tree, char* value, int line);
